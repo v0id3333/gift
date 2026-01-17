@@ -42,7 +42,6 @@ async function initBottle() {
 
   const btn = document.getElementById("bottleBtn");
   const out = document.getElementById("bottleOut");
-  const categorySelect = document.getElementById("bottleCategory");
 
   btn.addEventListener("click", () => {
     const r = Math.random();
@@ -57,17 +56,12 @@ async function initBottle() {
       return;
     }
 
-    let category = categorySelect.value;
-
-    if (category === "any") {
-      const keys = Object.keys(bottle.categories);
-      category = pickRandom(keys);
-    }
-
-    const messages = bottle.categories[category];
-    out.textContent = pickRandom(messages);
+    // pick from ALL categories automatically
+    const categories = Object.values(bottle.categories).flat();
+    out.textContent = pickRandom(categories);
   });
 }
+
 
 /* 3) Mood Weather */
 async function initWeather() {
