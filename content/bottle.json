@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "emptyChance": 0.05,
+    "dotsChance": 0.08
+  },
+  "categories": {
+    "soft": [
+      "You are allowed to rest.",
+      "Not everything needs a response."
+    ],
+    "mysterious": [
+      "Some doors close quietly.",
+      "Timing knows more than we do."
+    ],
+    "warm": [
+      "You’re doing better than you think.",
+      "I'm proud of you."
+    ]
+  }
+}
