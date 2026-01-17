@@ -19,22 +19,7 @@ function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-/* 1) One Line a Day */
-async function initOneLine() {
-  const data = await loadJSON("content/one-line.json");
-  const today = todayISO();
 
-  const lineEl = document.getElementById("oneLine");
-  const hintEl = document.getElementById("oneLineHint");
-
-  if (data[today]) {
-    lineEl.textContent = data[today];
-    hintEl.textContent = "";
-  } else {
-    lineEl.textContent = "…";
-    hintEl.textContent = "No line for today yet.";
-  }
-}
 
 /* 2) Message in a Bottle */
 async function initBottle() {
