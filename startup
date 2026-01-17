@@ -1,0 +1,11 @@
+quiet-site/
+  index.html
+  styles.css
+  app.js
+  content/
+    one-line.json
+    bottle.json
+    weather.json
+    unsent.json
+  tools/
+    generate_content.py
