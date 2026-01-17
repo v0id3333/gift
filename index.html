@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiet Site</title>
+
+  <!-- This links your CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>quiet, on purpose</h1>
+      <p class="sub">A small site that changes without trying too hard.</p>
+    </header>
+
+    <!-- One Line a Day -->
+    <section class="card">
+      <h2>One line a day</h2>
+      <p id="oneLine" class="big">…</p>
+      <p class="hint" id="oneLineHint"></p>
+    </section>
+
+    <!-- Message in a Bottle -->
+    <section class="card">
+      <h2>Message in a bottle</h2>
+
+      <button id="bottleBtn">open</button>
+
+      <p id="bottleOut" class="big"></p>
+
+      <div class="row">
+        <label class="small">category:</label>
+        <select id="bottleCategory">
+          <option value="any">any</option>
+          <option value="soft">soft</option>
+          <option value="mysterious">mysterious</option>
+          <option value="warm">warm</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Mood Weather -->
+    <section class="card">
+      <h2>Mood weather</h2>
+      <p id="weatherOut" class="big">…</p>
+    </section>
+
+    <!-- Unsent Messages -->
+    <section class="card">
+      <h2>Unsent messages</h2>
+
+      <button id="unsentBtn">reveal one</button>
+
+      <ul id="unsentList" class="list"></ul>
+
+      <p class="hint">
+        Revealed messages stay on this device.
+      </p>
+    </section>
+
+    <footer class="foot">
+      <p class="small">
+        made to last • no accounts • no noise
+      </p>
+    </footer>
+  </main>
+
+  <!-- This links your JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
