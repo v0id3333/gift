@@ -1,151 +1,52 @@
 :root{
-  --bg1:#0b0d10;
-  --bg2:#0f1420;
-  --card:rgba(255,255,255,.08);
-  --line:rgba(255,255,255,.14);
-  --text:rgba(255,255,255,.92);
-  --muted:rgba(255,255,255,.62);
-  --accent:#b794f4;
-  --accent2:#7dd3fc;
-  --radius:22px;
+  --bg:#050a06;
+  --ink:#8bffb0;
+  --muted:#5dca83;
+  --line:#1f3b2a;
+  --radius:14px;
 }
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
   min-height:100vh;
-  color:var(--text);
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   background:
-    radial-gradient(900px 520px at 20% 10%, rgba(183,148,244,.18), transparent 60%),
-    radial-gradient(850px 520px at 80% 85%, rgba(125,211,252,.14), transparent 55%),
-    linear-gradient(180deg, var(--bg2), var(--bg1));
+    radial-gradient(900px 520px at 50% 30%, rgba(139,255,176,.08), transparent 60%),
+    var(--bg);
+  color:var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
-.wrap{
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 34px 18px 44px;
-}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 40px}
 
-.top{
-  padding: 8px 6px 14px;
-  margin-bottom: 10px;
-}
-
-h1{
-  margin: 0 0 10px;
-  font-size: 40px;
-  letter-spacing: .2px;
-  line-height: 1.05;
-  background: linear-gradient(90deg, var(--text), rgba(255,255,255,.68));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.sub{
-  margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.5;
-  max-width: 65ch;
-}
+.top{padding:8px 6px 16px;border-bottom:1px dashed var(--line);margin-bottom:12px}
+h1{margin:0 0 10px;font-size:34px;letter-spacing:.6px}
+.sub{margin:0;color:var(--muted);line-height:1.6}
 
 .card{
-  position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 18px 16px;
-  margin: 14px 0;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.06);
-  overflow: hidden;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  margin:14px 0;
+  background:rgba(0,0,0,.35);
 }
 
-.card::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  background: radial-gradient(420px 200px at 20% 0%, rgba(183,148,244,.20), transparent 60%);
-  opacity:.9;
-  pointer-events:none;
-}
-
-h2{
-  margin: 0 0 10px;
-  font-size: 14px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.72);
-}
-
-.big{
-  margin: 8px 0 0;
-  font-size: 20px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-
-.hint{
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.small{
-  color: var(--muted);
-  font-size: 13px;
-}
+h2{margin:0 0 10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.big{margin:8px 0 0;font-size:18px;line-height:1.6}
+.hint,.small{color:var(--muted);font-size:12px}
 
 button{
-  appearance:none;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.10);
-  color: var(--text);
-  padding: 10px 14px;
-  border-radius: 14px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--ink);
+  padding:10px 12px;
+  border-radius:12px;
   cursor:pointer;
-  font-size: 14px;
-  transition: transform .06s ease, background .2s ease, border-color .2s ease;
 }
+button:hover{background:rgba(139,255,176,.08)}
+button:active{transform:translateY(1px)}
 
-button:hover{
-  background: rgba(255,255,255,.14);
-  border-color: rgba(255,255,255,.26);
-}
+.list{margin:12px 0 0;padding-left:18px}
+.list li{margin:8px 0}
 
-button:active{
-  transform: translateY(1px);
-}
-
-.list{
-  margin: 12px 0 0;
-  padding-left: 18px;
-}
-
-.list li{
-  margin: 8px 0;
-  color: rgba(255,255,255,.88);
-}
-
-.foot{
-  margin-top: 18px;
-  text-align:center;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* tiny “sparkle” divider (optional) */
-.top::after{
-  content:"";
-  display:block;
-  margin-top: 16px;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent, rgba(183,148,244,.75), rgba(125,211,252,.65), transparent);
-  opacity:.8;
-}
-
+.foot{text-align:center;margin-top:18px;color:var(--muted)}
