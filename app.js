@@ -1,4 +1,3 @@
-/* helpers */
 function todayISO() {
   const d = new Date();
   const yyyy = d.getFullYear();
@@ -8,10 +7,8 @@ function todayISO() {
 }
 
 async function loadJSON(path) {
-  const res = await fetch(path);
-  if (!res.ok) {
-    throw new Error(`Could not load ${path}`);
-  }
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Could not load ${path} (${res.status})`);
   return res.json();
 }
 
@@ -19,59 +16,52 @@ function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-
-
-/* 2) Message in a Bottle */
+/* Message in a Bottle (ignores categories, picks from all) */
 async function initBottle() {
   const bottle = await loadJSON("content/bottle.json");
-
   const btn = document.getElementById("bottleBtn");
   const out = document.getElementById("bottleOut");
+
+  const allMessages = Object.values(bottle.categories || {}).flat();
 
   btn.addEventListener("click", () => {
     const r = Math.random();
 
-    if (r < bottle.meta.emptyChance) {
+    if (bottle.meta && r < bottle.meta.emptyChance) {
       out.textContent = "";
       return;
     }
 
-    if (r < bottle.meta.emptyChance + bottle.meta.dotsChance) {
+    if (bottle.meta && r < (bottle.meta.emptyChance + bottle.meta.dotsChance)) {
       out.textContent = "…";
       return;
     }
 
-    // pick from ALL categories automatically
-    const categories = Object.values(bottle.categories).flat();
-    out.textContent = pickRandom(categories);
+    out.textContent = allMessages.length ? pickRandom(allMessages) : "…";
   });
 }
 
-
-/* 3) Mood Weather */
+/* Weather (date-based; shows fallback if date missing) */
 async function initWeather() {
   const data = await loadJSON("content/weather.json");
   const today = todayISO();
-
   const el = document.getElementById("weatherOut");
+
   el.textContent = data[today] || "Clear. Quiet. Nothing to prove.";
 }
 
-/* 4) Unsent Messages (persists locally) */
+/* Unsent messages (keeps revealing; doesn’t break) */
 async function initUnsent() {
   const messages = await loadJSON("content/unsent.json");
-
   const btn = document.getElementById("unsentBtn");
   const list = document.getElementById("unsentList");
 
-  const storageKey = "unsent_revealed_v1";
-  const revealed = new Set(
-    JSON.parse(localStorage.getItem(storageKey) || "[]")
-  );
+  const storageKey = "unsent_revealed_v2";
+  const revealed = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
 
   function render() {
     list.innerHTML = "";
-    revealed.forEach((msg) => {
+    [...revealed].forEach((msg) => {
       const li = document.createElement("li");
       li.textContent = msg;
       list.appendChild(li);
@@ -83,11 +73,13 @@ async function initUnsent() {
   btn.addEventListener("click", () => {
     const unseen = messages.filter((m) => !revealed.has(m));
 
-  if (unseen.length === 0) {
-  btn.textContent = "no more";
-  btn.disabled = true;
-  return;
-}
+    // If finished, loop again (so it never "dies")
+    if (unseen.length === 0) {
+      revealed.clear();
+      localStorage.setItem(storageKey, JSON.stringify([]));
+      render();
+      return;
+    }
 
     const next = pickRandom(unseen);
     revealed.add(next);
@@ -96,10 +88,8 @@ async function initUnsent() {
   });
 }
 
-/* start everything */
 async function main() {
   try {
-    await initOneLine();
     await initBottle();
     await initWeather();
     await initUnsent();
