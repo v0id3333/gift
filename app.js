@@ -98,12 +98,11 @@ async function initUnsent() {
   btn.addEventListener("click", () => {
     const unseen = messages.filter((m) => !revealed.has(m));
 
-    if (unseen.length === 0) {
-      revealed.clear();
-      localStorage.setItem(storageKey, JSON.stringify([]));
-      render();
-      return;
-    }
+  if (unseen.length === 0) {
+  btn.textContent = "no more";
+  btn.disabled = true;
+  return;
+}
 
     const next = pickRandom(unseen);
     revealed.add(next);
